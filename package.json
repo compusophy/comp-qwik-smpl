@@ -1,6 +1,6 @@
 {
-  "name": "my-qwik-empty-starter",
-  "description": "Blank project with routing included",
+  "name": "comp-qwik-smpl",
+  "description": "A simple Farcaster Frame app built with Qwik",
   "engines": {
     "node": "^18.17.0 || ^20.3.0 || >=21.0.0"
   },
@@ -8,17 +8,15 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "qwik build",
+    "build": "pnpm build.types && pnpm build.client && pnpm build.server",
     "build.client": "vite build",
     "build.preview": "vite build --ssr src/entry.preview.tsx",
     "build.server": "vite build -c adapters/vercel-edge/vite.config.ts",
     "build.types": "tsc --incremental --noEmit",
     "deploy": "vercel deploy",
     "dev": "vite --mode ssr",
-    "dev.debug": "node --inspect-brk ./node_modules/vite/bin/vite.js --mode ssr --force",
     "fmt": "prettier --write .",
     "fmt.check": "prettier --check .",
-    "lint": "eslint \"src/**/*.ts*\"",
     "preview": "qwik build preview && vite preview --open",
     "start": "vite --open --mode ssr",
     "qwik": "qwik"
@@ -26,20 +24,9 @@
   "devDependencies": {
     "@builder.io/qwik": "^1.12.1",
     "@builder.io/qwik-city": "^1.12.1",
-    "@tailwindcss/vite": "^4.0.0",
-    "@types/eslint": "8.56.10",
     "@types/node": "20.14.11",
-    "@typescript-eslint/eslint-plugin": "7.16.1",
-    "@typescript-eslint/parser": "7.16.1",
-    "autoprefixer": "^10.4.14",
-    "eslint": "8.57.0",
-    "eslint-plugin-qwik": "^1.12.1",
-    "postcss": "^8.4.31",
-    "postcss-preset-env": "^9.1.0",
     "prettier": "3.3.3",
-    "prettier-plugin-tailwindcss": "^0.6.11",
     "sharp": "^0.33.5",
-    "tailwindcss": "^4.0.0",
     "typescript": "5.4.5",
     "undici": "*",
     "vercel": "^29.1.1",

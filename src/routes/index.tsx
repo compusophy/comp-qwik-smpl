@@ -1,4 +1,4 @@
-import { component$, useVisibleTask$, useSignal } from "@builder.io/qwik";
+import { component$, useVisibleTask$, useSignal, useStyles$ } from "@builder.io/qwik";
 import type { DocumentHead } from "@builder.io/qwik-city";
 
 interface PerformanceMetrics {
@@ -13,6 +13,47 @@ interface PerformanceMetrics {
 export default component$(() => {
   const metrics = useSignal<PerformanceMetrics>({});
   const showMetrics = useSignal(false);
+  
+  useStyles$(`
+    .metrics-container {
+      margin-top: 2rem;
+      padding: 1rem;
+      border: 1px solid #eaeaea;
+      border-radius: 8px;
+      background-color: #f8f8f8;
+    }
+    .metrics-list {
+      list-style: none;
+      padding: 0;
+    }
+    .metrics-list li {
+      padding: 0.5rem 0;
+      border-bottom: 1px dashed #eaeaea;
+    }
+    .bundle-info {
+      margin-top: 1rem;
+      padding-top: 1rem;
+      border-top: 1px solid #eaeaea;
+    }
+    pre {
+      background-color: #eaeaea;
+      padding: 0.5rem;
+      overflow-x: auto;
+      border-radius: 4px;
+    }
+    button {
+      background-color: #0070f3;
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-bottom: 1rem;
+    }
+    button:hover {
+      background-color: #0060df;
+    }
+  `);
 
   // eslint-disable-next-line qwik/no-use-visible-task
   useVisibleTask$(() => {
@@ -106,49 +147,6 @@ export default component$(() => {
           </div>
         </div>
       )}
-
-      <style>
-        {`
-        .metrics-container {
-          margin-top: 2rem;
-          padding: 1rem;
-          border: 1px solid #eaeaea;
-          border-radius: 8px;
-          background-color: #f8f8f8;
-        }
-        .metrics-list {
-          list-style: none;
-          padding: 0;
-        }
-        .metrics-list li {
-          padding: 0.5rem 0;
-          border-bottom: 1px dashed #eaeaea;
-        }
-        .bundle-info {
-          margin-top: 1rem;
-          padding-top: 1rem;
-          border-top: 1px solid #eaeaea;
-        }
-        pre {
-          background-color: #eaeaea;
-          padding: 0.5rem;
-          overflow-x: auto;
-          border-radius: 4px;
-        }
-        button {
-          background-color: #0070f3;
-          color: white;
-          border: none;
-          padding: 0.5rem 1rem;
-          border-radius: 4px;
-          cursor: pointer;
-          margin-bottom: 1rem;
-        }
-        button:hover {
-          background-color: #0060df;
-        }
-        `}
-      </style>
     </>
   );
 });

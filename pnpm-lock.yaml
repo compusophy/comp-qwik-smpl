@@ -21,7 +21,7 @@ devDependencies:
     specifier: 5.4.5
     version: 5.4.5
   undici:
-    specifier: '*'
+    specifier: ^7.5.0
     version: 7.5.0
   vercel:
     specifier: ^29.1.1

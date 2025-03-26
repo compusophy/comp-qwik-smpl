@@ -6,12 +6,12 @@
     },
     "frame": {
       "version": "1",
-      "name": "comp-qwik-smpl",
+      "name": "CQS",
       "iconUrl": "https://comp-qwik-smpl.vercel.app/icon.jpg",
       "homeUrl": "https://comp-qwik-smpl.vercel.app",
       "imageUrl": "https://comp-qwik-smpl.vercel.app/icon.jpg",
-      "buttonTitle": "comp-qwik-smpl",
-      "splashImageUrl": "https://comp-qwik-smpl.vercel.app/splash.jpg",
+      "buttonTitle": "CQS",
+      "splashImageUrl": "https://comp-qwik-smpl.vercel.app/icon.jpg",
       "splashBackgroundColor": "#000000",
       "webhookUrl": "https://api.neynar.com/f/app/d9cc7795-7504-4a3a-ac5e-d2440a05092a/event"
     }

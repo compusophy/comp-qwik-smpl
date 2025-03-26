@@ -38,19 +38,19 @@ const frame = {
   version: "next",
   imageUrl: `${appUrl}/icon.jpg`,
   button: {
-    title: "comp-qwik-smpl",
+    title: "CQS",
     action: {
       type: "launch_frame",
-      name: "comp-qwik-smpl", 
+      name: "CQS", 
       url: appUrl,
-      splashImageUrl: `${appUrl}/splash.jpg`,
+      splashImageUrl: `${appUrl}/icon.jpg`,
       splashBackgroundColor: "#000000",
     },
   },
 };
 
 export const head: DocumentHead = {
-  title: "comp-qwik-smpl",
+  title: "CQS",
   meta: [
     {
       name: "description",
@@ -58,7 +58,7 @@ export const head: DocumentHead = {
     },
     {
       property: "og:title",
-      content: "comp-qwik-smpl",
+      content: "CQS",
     },
     {
       property: "og:description",

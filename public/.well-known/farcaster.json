@@ -1,0 +1,18 @@
+{
+    "accountAssociation": {
+      "header": "eyJmaWQiOjM1MDkxMSwidHlwZSI6ImN1c3RvZHkiLCJrZXkiOiIweDJGREVmM0Y0NzBlQ2QyQmM5YTk3NzU2OEM0M0FEMzg2MGMxNjExRDgifQ",
+      "payload": "eyJkb21haW4iOiJjb21wLXF3aWstc21wbC52ZXJjZWwuYXBwIn0",
+      "signature": "MHgzZGE5ZDY4Njg0MDZlNjQ3NmE3NGM3ZmU1MzYwNjQzZDRiYTc4NTYxMjljZjQ0ZjM1ZjE1N2FmMzExM2MwNjBjNDU0YTNmNzViMTUxMGYwOGUzZTk0YTlkMmYyMzA4ODA3OTk3YTBhZWM5YWYxYjc0NzAzYWMzY2I0ZTg3NTU5MTFi"
+    },
+    "frame": {
+      "version": "1",
+      "name": "comp-qwik-smpl",
+      "iconUrl": "https://comp-qwik-smpl.vercel.app/icon.jpg",
+      "homeUrl": "https://comp-qwik-smpl.vercel.app",
+      "imageUrl": "https://comp-qwik-smpl.vercel.app/icon.jpg",
+      "buttonTitle": "comp-qwik-smpl",
+      "splashImageUrl": "https://comp-qwik-smpl.vercel.app/splash.jpg",
+      "splashBackgroundColor": "#000000",
+      "webhookUrl": "https://api.neynar.com/f/app/d9cc7795-7504-4a3a-ac5e-d2440a05092a/event"
+    }
+  }

@@ -103,10 +103,79 @@ export default component$(() => {
       padding-top: 1rem;
       border-top: 1px solid #eaeaea;
     }
+    .page-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+    .reload-button {
+      background-color: #0070f3;
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .reload-button:hover {
+      background-color: #0060df;
+    }
   `);
 
   // eslint-disable-next-line qwik/no-use-visible-task
-  useVisibleTask$(() => {
+  useVisibleTask$(({ cleanup }) => {
+    // Restore UI state from localStorage
+    const savedShowDemo = localStorage.getItem('show-demo');
+    if (savedShowDemo) {
+      showDemo.value = savedShowDemo === 'true';
+    }
+    
+    const savedShowMetrics = localStorage.getItem('show-metrics');
+    if (savedShowMetrics) {
+      showMetrics.value = savedShowMetrics === 'true';
+    }
+    
+    // Helper function for robust scroll restoration
+    const restoreScrollPosition = () => {
+      const savedScrollY = localStorage.getItem('scroll-position');
+      if (savedScrollY) {
+        window.scrollTo(0, parseInt(savedScrollY, 10));
+      }
+    };
+    
+    // Wait for DOM and then images to load before restoring scroll
+    window.addEventListener('DOMContentLoaded', restoreScrollPosition);
+    window.addEventListener('load', restoreScrollPosition);
+    
+    // Also try after a short delay as a fallback
+    setTimeout(restoreScrollPosition, 300);
+    
+    // Use a more reliable approach to save scroll position
+    // Save scroll position not just on beforeunload but also during scrolling
+    let scrollDebounceTimer: any;
+    const saveScrollPosition = () => {
+      clearTimeout(scrollDebounceTimer);
+      scrollDebounceTimer = setTimeout(() => {
+        localStorage.setItem('scroll-position', window.scrollY.toString());
+      }, 100);
+    };
+    
+    window.addEventListener('scroll', saveScrollPosition, { passive: true });
+    window.addEventListener('beforeunload', () => {
+      localStorage.setItem('scroll-position', window.scrollY.toString());
+    });
+    
+    // Cleanup event listeners when component unmounts
+    cleanup(() => {
+      window.removeEventListener('scroll', saveScrollPosition);
+      window.removeEventListener('beforeunload', () => {});
+      window.removeEventListener('DOMContentLoaded', restoreScrollPosition);
+      window.removeEventListener('load', restoreScrollPosition);
+    });
+    
     // This runs on the client after the component is mounted
     // Add the Farcaster Frame SDK from CDN
     const sdkScript = document.createElement('script');
@@ -159,7 +228,8 @@ export default component$(() => {
         metrics.value = { ...metrics.value, lcp: pageLoadTime * 1.2 };
       }
       
-      showMetrics.value = false; // Start with metrics hidden
+      // Don't force metrics to be hidden, respect localStorage
+      // showMetrics.value = false; // Start with metrics hidden
     }, 300);
     
     // Use PerformanceObserver to track LCP (modern approach)
@@ -184,7 +254,15 @@ export default component$(() => {
 
   return (
     <>
-      <h1>Hi 👋</h1>
+      <div class="page-header">
+        <h1>Hi 👋</h1>
+        <button 
+          class="reload-button" 
+          onClick$={() => window.location.reload()}
+        >
+          ↻ Reload Page
+        </button>
+      </div>
       <div>
         Can't wait to see what you build with CQS!
         <br />
@@ -193,7 +271,10 @@ export default component$(() => {
 
       <div class="demo-container">
         <h3>⚡ Resumability & Lazy Loading</h3>
-        <button onClick$={() => showDemo.value = !showDemo.value}>
+        <button onClick$={() => {
+          showDemo.value = !showDemo.value;
+          localStorage.setItem('show-demo', showDemo.value.toString());
+        }}>
           {showDemo.value ? 'Hide Demo' : 'Show Demo'}
         </button>
 
@@ -218,7 +299,10 @@ export default component$(() => {
 
       <div class="metrics-container">
         <h3>📊 Performance</h3>
-        <button onClick$={() => showMetrics.value = !showMetrics.value}>
+        <button onClick$={() => {
+          showMetrics.value = !showMetrics.value;
+          localStorage.setItem('show-metrics', showMetrics.value.toString());
+        }}>
           {showMetrics.value ? 'Hide Metrics' : 'Show Metrics'}
         </button>
         
